@@ -20,10 +20,63 @@ public class Program {
 		
 		int opcao = 0;
 		
+		do {
+			showMenu(sc,list);
+			opcao = sc.nextInt();
+			sc.nextLine();
+		
+			switch (opcao) {
+		
+		case 1:
+			
+		adicionarCliente(sc, list);
+		break;
+			
+		//Deposito
+		case 2:
+		deposit(sc,list);
+		break;
+		// Saque
+		case 3:
+		withdraw(sc,list);
+		break;
+		case 4:
+			showClientData(sc,list);
+		break;
+		case 0:
+			System.out.println("Saindo do programa...");
+			break;
+			
+		default:
+			System.out.println("Opção invalida!");
+			}
 		
 		
+		} while (opcao != 0);
+		 
+		sc.close();
+		
+	}
+	
+	public static void showMenu (Scanner sc, List<Client> list) {
+		System.out.println("------------------------------------------------------------");
+		System.out.println("MENU: ");
+		System.out.println("1 - Add client");
+		if (!list.isEmpty()) {
+			System.out.println("2 - Deposit");
+			System.out.println("3 -  Withdraw");
+			System.out.println("4 - Show clients data");
+			System.out.println();
+			System.out.print("Escolha uma opção: ");
+		}else {
+			System.out.println("0 - EXIT");
+			System.out.print("Escolha uma opção: ");
 			
-			
+		}
+	}
+	
+	public static void adicionarCliente (Scanner sc, List<Client> list) {
+		
 		System.out.print("How many clients will you add? ");
 		
 		
@@ -77,82 +130,67 @@ public class Program {
 				System.out.println("Ivalid input. Please enter with a valid input");
 				sc.nextLine();
 				i--;
-				break;
+				}
+			break;
 			}
 			
 		}
 		
-		System.out.println();
-		System.out.println("Client data: ");
-		
-		for (Client lists: list) {
-		System.out.println("----------------------------------------------");
-		System.out.println(lists);
-		
-		}
-		do {
-			if (!list.isEmpty()) {
-				System.out.println();
-				System.out.println("1 - Deposit");
-				System.out.println("2 -  Withdraw");
-				System.out.println("0 - EXIT");
-				System.out.print("Escolha uma opção: ");
-				opcao = sc.nextInt();
-			}
-			switch (opcao) {
-		case 1:
-		System.out.println();
-		System.out.print("Id for a deposit: ");
-		int id = sc.nextInt();
-		sc.nextLine();
-		
-		boolean clientFound = false;
-		for (Client client: list) {
-			if (client.getId() == id && client instanceof Account) {
-				clientFound = true;
-				System.out.print("Deposit amount: "); 
-				double amount = sc.nextDouble();
-				Account account = (Account) client;
-				account.deposit(amount);
-				System.out.println();
-				System.out.println("New balance: \n" + account);
-				break;
-			}
-		}
-	
-		case 2:
-		System.out.println();
-		System.out.print("Enter id for withdraw: ");
-		id = sc.nextInt();
-		System.out.println();
+		public static void deposit(Scanner sc, List<Client> list) {
+			System.out.println();
+			System.out.print("Id for a deposit: ");
+			int id = sc.nextInt();
+			sc.nextLine();
+			
+			boolean clientFound = false;
 			for (Client client: list) {
 				if (client.getId() == id && client instanceof Account) {
 					clientFound = true;
-					System.out.print("Withdraw amount: "); 
+					System.out.print("Deposit amount: "); 
 					double amount = sc.nextDouble();
 					Account account = (Account) client;
-					account.withdraw(amount);
+					account.deposit(amount);
 					System.out.println();
 					System.out.println("New balance: \n" + account);
 					break;
 				}
 			}
-		break;
-		
-		case 0:
-			System.out.println("Saindo do programa...");
-			break;
-			
-		default:
-			System.out.println("Opção invalida!");
+		}
+	
+	
+		public static void withdraw(Scanner sc, List<Client> list) {
+			System.out.println();
+			System.out.print("Enter id for withdraw: ");
+			int id = sc.nextInt();
+			System.out.println();
+			boolean clientFound = false;
+				for (Client client: list) {
+					if (client.getId() == id && client instanceof Account) {
+						clientFound = true;
+						System.out.print("Withdraw amount: "); 
+						double amount = sc.nextDouble();
+						Account account = (Account) client;
+						account.withdraw(amount);
+						System.out.println();
+						System.out.println("New balance: \n" + account);
+						break;
+					}
+				}	
 			}
 		
+		public static void showClientData(Scanner sc, List<Client> list) {
+			System.out.println();
+			System.out.println("Client data: ");
+			
+			for (Client lists: list) {
+			System.out.println("----------------------------------------------");
+			System.out.println(lists);
+			
+			}
+
+			
+		}
 		
-		} while (opcao != 0);
-		 
-		sc.close();
-		
-	}
 		public static boolean isAlpha(String str) {
 			return str.chars().allMatch(Character::isLetter);
 		}
