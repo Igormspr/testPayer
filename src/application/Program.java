@@ -16,9 +16,30 @@ public class Program {
 		Locale.setDefault(Locale.US);
 		Scanner sc = new Scanner (System.in);
 		
+		List <Client> list = new ArrayList <>();
+		
+		int opcao = 0;
+		
+		
+		do {
+			
+			System.out.println("MENU");
+			System.out.println("1 - Add client");
+			if (!list.isEmpty()) {
+			System.out.println("2 - Deposit");
+			System.out.println("3 -  Withdraw");
+			}
+			System.out.println("0 - EXIT");
+			System.out.print("Escolha uma opção: ");
+			opcao = sc.nextInt();
+			
+		switch (opcao) {
+		
+		
+		case 1 :
 		System.out.print("How many clients will you add? ");
 		
-		List <Client> list = new ArrayList <>();
+		
 		
 		int n = sc.nextInt();
 		
@@ -69,10 +90,11 @@ public class Program {
 				System.out.println("Ivalid input. Please enter with a valid input");
 				sc.nextLine();
 				i--;
-				
+				break;
 			}
 			
 		}
+		
 		System.out.println();
 		System.out.println("Client data: ");
 		
@@ -82,7 +104,10 @@ public class Program {
 		
 		}
 		
-		
+		case 2:
+			if (list.isEmpty()) {
+				System.out.println("There is no client for a deposit");
+			}else
 		System.out.println();
 		System.out.print("Id for a deposit: ");
 		int id = sc.nextInt();
@@ -98,10 +123,11 @@ public class Program {
 				account.deposit(amount);
 				System.out.println();
 				System.out.println("New balance: \n" + account);
-				
+				break;
 			}
 		}
 		
+		case 3:
 		System.out.println();
 		System.out.print("Enter id for withdraw: ");
 		id = sc.nextInt();
@@ -115,9 +141,21 @@ public class Program {
 					account.withdraw(amount);
 					System.out.println();
 					System.out.println("New balance: \n" + account);
+					break;
 				}
 			}
+		break;
 		
+		case 0:
+			System.out.println("Saindo do programa...");
+			break;
+			
+		default:
+			System.out.println("Opção invalida!");
+			}
+		
+		} while (opcao != 0);
+		 
 		sc.close();
 		
 	}
