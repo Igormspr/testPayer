@@ -21,22 +21,9 @@ public class Program {
 		int opcao = 0;
 		
 		
-		do {
-			
-			System.out.println("MENU");
-			System.out.println("1 - Add client");
-			if (!list.isEmpty()) {
-			System.out.println("2 - Deposit");
-			System.out.println("3 -  Withdraw");
-			}
-			System.out.println("0 - EXIT");
-			System.out.print("Escolha uma opção: ");
-			opcao = sc.nextInt();
-			
-		switch (opcao) {
 		
-		
-		case 1 :
+			
+			
 		System.out.print("How many clients will you add? ");
 		
 		
@@ -103,11 +90,17 @@ public class Program {
 		System.out.println(lists);
 		
 		}
-		
-		case 2:
-			if (list.isEmpty()) {
-				System.out.println("There is no client for a deposit");
-			}else
+		do {
+			if (!list.isEmpty()) {
+				System.out.println();
+				System.out.println("1 - Deposit");
+				System.out.println("2 -  Withdraw");
+				System.out.println("0 - EXIT");
+				System.out.print("Escolha uma opção: ");
+				opcao = sc.nextInt();
+			}
+			switch (opcao) {
+		case 1:
 		System.out.println();
 		System.out.print("Id for a deposit: ");
 		int id = sc.nextInt();
@@ -126,8 +119,8 @@ public class Program {
 				break;
 			}
 		}
-		
-		case 3:
+	
+		case 2:
 		System.out.println();
 		System.out.print("Enter id for withdraw: ");
 		id = sc.nextInt();
@@ -153,6 +146,7 @@ public class Program {
 		default:
 			System.out.println("Opção invalida!");
 			}
+		
 		
 		} while (opcao != 0);
 		 
